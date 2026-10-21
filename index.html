@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ten Routes · Adventure Roadbook</title>
+
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+  <script type="module" src="js/index-_OjXHTxv.js"></script>
+  <link rel="stylesheet" crossorigin="" href="css/index-BLomJFec.css">
+<script src="js/sdk-seed.js" defer="" data-kimi-disable-watermark="false" data-kimi-analytics="false"></script></head>
+<body>
+<template id="app-layout">
+<div id="loader">
+  <div class="mini-globe"><div class="mg-shine"></div><div class="mg-orbit"></div></div>
+  <div id="loader-progress" style="display:none"></div><div id="loader-status" style="display:none"></div>
+</div>
+
+<canvas id="scene"></canvas>
+<div id="vignette"></div>
+<div id="grid-overlay"></div>
+
+<!-- Coordinate-lock HUD -->
+<div id="coord-hud">
+  <div class="ch-row"><span class="ch-k">LAT</span><span class="ch-v" id="ch-lat">27.9881°N</span></div>
+  <div class="ch-row"><span class="ch-k">LON</span><span class="ch-v" id="ch-lon">86.9250°E</span></div>
+  <div class="ch-row"><span class="ch-k">ALT</span><span class="ch-v" id="ch-alt">—</span></div>
+  <div class="ch-row"><span class="ch-k">MODE</span><span class="ch-v" id="ch-mode">ORBIT</span></div>
+</div>
+<div id="crosshair" class="hidden"></div>
+
+<!-- Global top bar -->
+<header id="topbar">
+  <div class="brand">THE TEN <span>ROUTES</span></div>
+  <div class="topbar-right">
+    <button id="btn-home" class="ng-btn hidden" title="Back">←</button>
+  </div>
+</header>
+
+<!-- Globe page UI -->
+<div id="globe-ui">
+  <div class="globe-headline">
+    <h1>The Ten Routes</h1>
+    <p>Ten routes at the edge of human endurance, mapped across one reachable world.</p>
+  </div>
+  <!-- Two gesture hints, one on each side of the globe. Each fades out once its gesture
+       has been used — once taught, there is no need to keep teaching it. -->
+  <div id="cue-drag" class="cue">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <ellipse cx="20" cy="20" rx="12" ry="12"></ellipse>
+      <circle cx="20" cy="20" r="2.4" fill="currentColor" stroke="none"></circle>
+      <path d="M7.5 16.5 3.5 20l4 3.5"></path>
+      <path d="M32.5 16.5 36.5 20l-4 3.5"></path>
+    </svg>
+    <span>Drag to orbit</span>
+  </div>
+  <div id="cue-zoom" class="cue">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <rect x="13.5" y="9" width="13" height="20" rx="6.5"></rect>
+      <line class="wheel" x1="20" y1="13.5" x2="20" y2="17.5"></line>
+      <path d="M16 35.5 20 31.5l4 4"></path>
+    </svg>
+    <span>Scroll to zoom in</span>
+  </div>
+
+  <div id="globe-hint">
+    <span class="hint-item">Scroll · Zoom</span>
+    <span class="hint-item">Drag · Orbit</span>
+    <span class="hint-item">Select a beacon · Enter route</span>
+  </div>
+  <div id="globe-tooltip" class="hidden">
+    <div class="tt-no"></div>
+    <div class="tt-name"></div>
+    <div class="tt-place"></div>
+    <div class="tt-brief"></div>
+    <div class="tt-cta">Open chapter →</div>
+  </div>
+</div>
+
+<!-- Everest chapter UI -->
+<div id="everest-ui" class="hidden">
+  <div class="chapter-title">
+    <div class="ct-cn">Mount Everest · Southeast Ridge</div>
+    <div class="ct-en">EVEREST SOUTH COL ROUTE · 8848.86M</div>
+  </div>
+  <div class="chapter-actions">
+    <button id="btn-snow" class="ng-btn active">Snow On</button>
+    <button id="btn-audio" class="ng-btn active">🔊</button>
+  </div>
+  <div id="node-panel" class="hidden">
+    <button id="np-close">×</button>
+    <div class="np-day"></div>
+    <h2 class="np-name"></h2>
+    <div class="np-en"></div>
+    <div class="np-elevrow"><span class="np-elev"></span><span class="np-seg"></span><span class="np-dist"></span></div>
+    <div class="np-section"><h3>Route Notes</h3><p class="np-brief"></p></div>
+    <div class="np-section"><h3>Equipment</h3><div class="np-gear-wrap"></div><p class="np-gear"></p></div>
+    <div class="np-section warn"><h3>Hazards</h3><p class="np-note"></p></div>
+  </div>
+  <!-- left scroll node rail -->
+  <div id="node-rail"></div>
+  <!-- bottom first-person wide button -->
+  <button id="btn-fp-wide" class="ng-btn fp-wide">◉ First-Person View</button>
+</div>
+
+<div id="intro-card" class="hidden">
+  <div class="ic-no"></div>
+  <div class="ic-name"></div>
+  <div class="ic-place"></div>
+  <div class="ic-brief"></div>
+  <a class="ic-site" href="#" rel="noopener" target="_blank">Official site ↗</a>
+  <div class="ic-actions">
+    <button id="ic-enter" class="ng-btn">Enter chapter ➤</button>
+  </div>
+</div>
+<div id="chapter-loader" class="hidden">
+  <div class="cl-globe"></div>
+  <div class="cl-text">Loading chapter…</div>
+  <div class="cl-bar"><div id="cl-progress"></div></div>
+</div>
+<div id="fp-mask" class="hidden"></div>
+<div id="fade"></div>
+
+</template>
+<div id="root"></div>
+
+
+</body></html>
